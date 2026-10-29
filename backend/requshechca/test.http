@@ -1,4 +1,4 @@
 
 ### 1. Проверка сервера
-GET http://localhost:3000/
-
+GET http://localhost:3000/api/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzAzLCJpYXQiOjE3OTMzMTAwMjAsImV4cCI6MTc5MzMxNzIyMH0.TeXC-iL1xhl1MjTqfxinM5ECfdGJmd-VL4nFEJrOmZk

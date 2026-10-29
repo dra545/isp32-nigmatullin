@@ -1,88 +1,113 @@
-!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Кабинет бойца</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIGHT CLUB — Личный кабинет</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ===== Вход и регистрация ===== -->
-<section id="auth" class="auth">
-  <div class="hero">
-    <div>
-      <h1>Кабинет бойца</h1>
-      <p>Тренировки, спарринги и динамика веса — в одном месте.</p>
-    </div>
-    <div class="belt"><b class="on"></b><b class="on"></b><b class="on"></b><b></b><b></b></div>
-  </div>
-  <div class="formside">
-    <div class="panel">
-      <div class="tabs">
-        <button type="button" data-auth="login" class="on">Вход</button>
-        <button type="button" data-auth="register">Регистрация</button>
-      </div>
-      <form id="loginForm" novalidate>
-        <div id="loginFields"></div>
-        <div class="formerr" id="loginErr" hidden></div>
-        <button class="btn btn-red" type="submit">Войти</button>
-      </form>
-      <form id="registerForm" novalidate hidden>
-        <div id="regFields"></div>
-        <button class="btn btn-red" type="submit">Зарегистрироваться</button>
-      </form>
-    </div>
-  </div>
-</section>
+<header class="header">
+    <a href="#" class="logo">FIGHT<span>CLUB</span></a>
 
-<!-- ===== Приложение ===== -->
-<div id="app" class="shell" hidden>
-  <aside class="side">
-    <div class="brand">Кабинет бойца<small>тренировки, спарринги, вес</small></div>
-    <div class="who"><b id="whoName"></b><span id="whoSport"></span></div>
-    <nav id="nav">
-      <button data-tab="dash" class="on">Главная</button>
-      <button data-tab="trainings">Тренировки</button>
-      <button data-tab="sparrings">Спарринги</button>
-      <button data-tab="body">Параметры тела</button>
-      <button data-tab="profile">Мой профиль</button>
+    <nav>
+        <a href="#home">Главная</a>
+        <a href="#about">О проекте</a>
     </nav>
-    <button class="btn btn-ghost" id="logout">Выйти</button>
-  </aside>
 
-  <main class="main">
-    <div id="flash" class="flash" hidden></div>
-    <section class="view" id="view-dash"></section>
-    <section class="view" id="view-trainings" hidden></section>
-    <section class="view" id="view-sparrings" hidden></section>
-    <section class="view" id="view-body" hidden></section>
-    <section class="view" id="view-profile" hidden>
-      <div class="page-head"><h1>Мой профиль</h1></div>
-      <div class="panel formbox">
-        <form id="profileForm" novalidate>
-          <div id="profileFields"></div>
-          <button class="btn btn-red" type="submit">Сохранить</button>
-          <button class="btn btn-ghost" type="button" id="deleteAccount">Удалить аккаунт</button>
-        </form>
-      </div>
+    <div class="header-buttons">
+        <button class="btn-login" onclick="openAuth('login')">Войти</button>
+        <button class="btn-register" onclick="openAuth('register')">
+            Регистрация
+        </button>
+    </div>
+</header>
+
+<main>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p class="subtitle">СИСТЕМА УПРАВЛЕНИЯ ЕДИНОБОРСТВАМИ</p>
+
+            <h1>СТАНЬ<br>СИЛЬНЕЕ.<br><span>БУДЬ ЛУЧШЕ.</span></h1>
+
+            <p class="description">
+                Единая платформа для бойцов, тренеров
+                и администрации. Управляй своим спортивным
+                профилем и следи за своей деятельностью.
+            </p>
+
+            <button class="btn-register big"
+                onclick="openAuth('register')">
+                НАЧАТЬ СЕЙЧАС
+            </button>
+        </div>
+
+        <div class="hero-image"></div>
     </section>
-  </main>
+
+    <section class="about" id="about">
+        <p class="subtitle">НАША ПЛАТФОРМА</p>
+        <h2>ВСЁ ДЛЯ ТВОЕГО РАЗВИТИЯ</h2>
+
+        <div class="features">
+            <div class="feature">
+                <h3>01 / ПРОФИЛЬ</h3>
+                <p>Личный кабинет и управление своими данными.</p>
+            </div>
+
+            <div class="feature">
+                <h3>02 / ТРЕНИРОВКИ</h3>
+                <p>Работа с информацией о спортивной деятельности.</p>
+            </div>
+
+            <div class="feature">
+                <h3>03 / УПРАВЛЕНИЕ</h3>
+                <p>Система управления для менеджеров и администраторов.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div class="modal" id="authModal">
+    <div class="modal-content">
+        <button class="close" onclick="closeAuth()">×</button>
+
+        <h2 id="authTitle">Вход</h2>
+
+        <form id="authForm">
+            <input
+                type="text"
+                id="login"
+                placeholder="Логин"
+                required
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Пароль"
+                required
+            >
+
+            <button type="submit" class="btn-register">
+                Продолжить
+            </button>
+        </form>
+
+        <p id="authMessage"></p>
+
+        <p class="switch-auth" id="switchAuth">
+            Нет аккаунта?
+            <a href="#" onclick="openAuth('register')">
+                Зарегистрироваться
+            </a>
+        </p>
+    </div>
 </div>
 
-<!-- ===== Окно добавления / изменения ===== -->
-<dialog id="dlg">
-  <form id="dlgForm" novalidate>
-    <h2 id="dlgTitle"></h2>
-    <div class="idline" id="dlgIdLine" hidden></div>
-    <div id="dlgFields"></div>
-    <div class="dlg-actions">
-      <button type="submit" class="btn btn-red">Сохранить</button>
-      <button type="button" class="btn btn-ghost" id="dlgCancel">Отмена</button>
-    </div>
-  </form>
-</dialog>
-
-<script src="app.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
+
